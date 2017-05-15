@@ -92,6 +92,8 @@ app.get('/post/:id', (req, res, next) => {
 /* Blocks */
 app.route('/blocks')
   .post((req, res, next) => {
+    const BlockModel = require('./models/blocks/' + req.body.type).default;
+
     BlockModel.query()
       .insertAndFetch(req.body)
       .then(block => res.json(block))
@@ -136,7 +138,6 @@ app.route('/blocks/:id/medias')
 
     // Upload and link medias
     (req, res, next) => {
-      console.log(req.files)
       Promise.all((req.files || []).map(file => req.blockModel.mediasStrategies[file.fieldname](req.block, file)))
         .then(() => req.block.$relatedQuery('medias').then((medias) => res.json(medias)))
         .catch(next);

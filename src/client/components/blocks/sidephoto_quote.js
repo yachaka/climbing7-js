@@ -19,6 +19,7 @@ class Sidephoto_quote extends Block {
       id: T.number.isRequired,
       data: T.shape({
         text: T.string.isRequired,
+        percentSplit: T.number.isRequired,
       }).isRequired,
     }).isRequired,
   };
@@ -76,13 +77,10 @@ class Sidephoto_quote extends Block {
           split="vertical"
           size={percentSplit + '%'}
           onDragFinished={this.setPercentSplit}
+          style={{ position: undefined, height: undefined }}
         >
-          <div
-            className="photo-div"
-            style={{
-              backgroundImage: 'url('+ (photo && photo.url) + ')',
-            }}
-          >
+          <div className="photo-div">
+            <img className="photo" src={photo && photo.url}/>
             <DropZone
               className="change-photo"
               multiple={false}
