@@ -1,0 +1,12 @@
+
+extends layout.pug
+
+append content
+  h1 Post
+  #post!= postMarkup
+
+  script(type='text/javascript').
+    ReactDOM.render(
+      React.createElement(Post, { "post": !{postData} }),
+      document.getElementById('post')
+    );

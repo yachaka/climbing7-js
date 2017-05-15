@@ -1,0 +1,125 @@
+# ************************************************************
+# Sequel Pro SQL dump
+# Version 4541
+#
+# http://www.sequelpro.com/
+# https://github.com/sequelpro/sequelpro
+#
+# Host: 127.0.0.1 (MySQL 5.7.16)
+# Database: climbing7
+# Generation Time: 2017-05-15 07:02:21 +0000
+# ************************************************************
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+
+# Dump of table blocks
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `blocks`;
+
+CREATE TABLE `blocks` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `key` varchar(100) DEFAULT NULL,
+  `type` varchar(45) DEFAULT NULL,
+  `post_id` int(11) DEFAULT NULL,
+  `data` json DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+LOCK TABLES `blocks` WRITE;
+/*!40000 ALTER TABLE `blocks` DISABLE KEYS */;
+
+INSERT INTO `blocks` (`id`, `key`, `type`, `post_id`, `data`)
+VALUES
+	(1,'presentation','sidephoto_quote',1,X'7B2274657874223A20225761646920686A72692C206D61676E6966697175655761646920686A72692C206D61676E6966697175655761646920686A72692C206D61676E6966697175655761646920686A72692C206D61676E6966697175655761646920686A72692C206D61676E6966697175655761646920686A72692C206D61676E6966697175655761646920686A72692C206D61676E6966697175655761646920686A72692C206D61676E6966697175655761646920686A72692C206D61676E6966697175653C6469763E3C62723E3C2F6469763E3C6469763E3C62723E3C2F6469763E222C202270657263656E7453706C6974223A2034392E313532353231353835353537337D');
+
+/*!40000 ALTER TABLE `blocks` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table blocks_medias
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `blocks_medias`;
+
+CREATE TABLE `blocks_medias` (
+  `block_id` int(11) NOT NULL,
+  `media_id` int(11) NOT NULL,
+  `key` varchar(500) DEFAULT NULL,
+  PRIMARY KEY (`block_id`,`media_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+LOCK TABLES `blocks_medias` WRITE;
+/*!40000 ALTER TABLE `blocks_medias` DISABLE KEYS */;
+
+INSERT INTO `blocks_medias` (`block_id`, `media_id`, `key`)
+VALUES
+	(1,38,'photo'),
+	(1,42,'photo');
+
+/*!40000 ALTER TABLE `blocks_medias` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table medias
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `medias`;
+
+CREATE TABLE `medias` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `filename` varchar(1000) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+LOCK TABLES `medias` WRITE;
+/*!40000 ALTER TABLE `medias` DISABLE KEYS */;
+
+INSERT INTO `medias` (`id`, `filename`)
+VALUES
+	(42,'7b8043129446e90c5b661843185bc6d61494776827723.jpeg');
+
+/*!40000 ALTER TABLE `medias` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table posts
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `posts`;
+
+CREATE TABLE `posts` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(100) DEFAULT NULL,
+  `slug` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+LOCK TABLES `posts` WRITE;
+/*!40000 ALTER TABLE `posts` DISABLE KEYS */;
+
+INSERT INTO `posts` (`id`, `title`, `slug`)
+VALUES
+	(1,'Test post !','test-post');
+
+/*!40000 ALTER TABLE `posts` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

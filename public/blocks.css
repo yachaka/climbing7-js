@@ -1,0 +1,9 @@
+
+
+.block {}
+
+.block.sidephoto_quote {}
+  .block.sidephoto_quote .photo-div { background-size: cover; background-position: center center; align-items: center; position: absolute; top: 0; left: 0; right: 0; bottom: 0; }
+    .block.sidephoto_quote .photo-div .change-photo { background-color: rgba(0, 0, 0, 0.6); cursor: pointer; opacity: 0; pointer-events: none; transition: opacity 250ms ease-out; position: absolute; top: 0; left: 0; right: 0; bottom: 0; }
+    .block.sidephoto_quote .photo-div:hover .change-photo { opacity: 1; pointer-events: auto; }
+  .block.sidephoto_quote .text-div { position: absolute; top: 0; left: 0; right: 0; bottom: 0; }

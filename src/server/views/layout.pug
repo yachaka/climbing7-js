@@ -1,0 +1,12 @@
+html
+  head
+    block head
+      title= pageTitle
+      script(type='text/javascript' src='/bundle.js')
+      link(rel='stylesheet' href='/blocks.css')
+      link(rel='stylesheet' href='/main.css')
+      link(rel='stylesheet' href='/react-resizable.css')
+      link(rel='stylesheet' href='/SplitPane.css')
+      link(href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css", rel="stylesheet", integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN", crossorigin="anonymous")
+  body
+    block content
