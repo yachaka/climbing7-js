@@ -28,9 +28,18 @@ export function typeToComponent(type) {
 
 export function typeToDefaultData(type) {
   switch (type) {
+    
     case 'sidephoto_quote':
-      return { text: '', percentSplit: 30 };
+      return {
+        text: '',
+        percentSplit: 30,
+        photoOnRight: false,
+      };
+
     case 'text':
-      return { title: '', text: '' };
+      return {
+        title: '',
+        text: '',
+      };
   }
 }

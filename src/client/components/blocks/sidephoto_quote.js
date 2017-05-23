@@ -24,18 +24,13 @@ class Sidephoto_quote extends Block {
     }).isRequired,
   };
 
-  onTextChange = (e) => {
-    this.setDataKey('text', e.target.value);
-    this.debouncedSave();
-  }
   setPercentSplit = (size) => {
     this.setDataKey('percentSplit', size / this.div.offsetWidth * 100);
     this.debouncedSave();
   }
-  uploadPhoto = (files) => {
-    this.uploadMedias({
-      photo: files[0],
-    });
+  togglePhotoPosition = () => {
+    this.setDataKey('photoOnRight', !this.state.block.data.photoOnRight);
+    this.debouncedSave();
   }
 
   render() {
@@ -54,11 +49,13 @@ class Sidephoto_quote extends Block {
     } = block;
 
     const {
-      text,
       percentSplit,
+      photoOnRight,
     } = data;
 
-    const photo = medias.find(m => m.key === 'photo');
+    const panes = photoOnRight
+      ? [this.renderTextPane(), this.renderPhotoPane()]
+      : [this.renderPhotoPane(), this.renderTextPane()];
 
     return (
       <div
@@ -68,9 +65,7 @@ class Sidephoto_quote extends Block {
         <p>
           {saving && 'Saving...'}
           {error}
-          {editMode
-            ? <a onClick={this.normalMode}>Go normal</a>
-            : <a onClick={this.editMode}>Go edit</a> }
+          <a onClick={this.togglePhotoPosition}>Toggle photo position</a>
         </p>
 
         <SplitPane
@@ -79,26 +74,55 @@ class Sidephoto_quote extends Block {
           onDragFinished={this.setPercentSplit}
           style={{ position: undefined, height: undefined }}
         >
-          <div className="photo-div">
-            <img className="photo" src={photo && photo.url}/>
-            <DropZone
-              className="change-photo"
-              multiple={false}
-              onDrop={this.uploadPhoto}
-            >
-              Changer la photo
-            </DropZone>
-          </div>
-
-          <ContentEditable
-            className="text-div"
-            html={text}
-            onChange={this.onTextChange}
-          />
-
+          {panes}
         </SplitPane>
 
       </div>
+    );
+  }
+
+  uploadPhoto = (files) => {
+    this.uploadMedias({
+      photo: files[0],
+    });
+  }
+
+  renderPhotoPane = () => {
+    const {
+      medias,
+      data,
+    } = this.state.block;
+
+    const photo = medias.find(m => m.key === 'photo');
+
+    return (
+      <div key="photoPane" className="photo-div">
+        <img className="photo" src={photo && photo.url}/>
+        <DropZone
+          className="change-photo"
+          multiple={false}
+          onDrop={this.uploadPhoto}
+        >
+          <i className="fa fa-camera"></i>
+          Changer la photo
+        </DropZone>
+      </div>
+    );
+  }
+
+  onTextChange = (e) => {
+    this.setDataKey('text', e.target.value);
+    this.debouncedSave();
+  }
+  
+  renderTextPane = () => {
+    return (
+      <ContentEditable
+        key="textPane"
+        className="text-div"
+        html={this.state.block.data.text}
+        onChange={this.onTextChange}
+      />
     );
   }
 
